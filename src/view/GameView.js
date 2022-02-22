@@ -1,9 +1,10 @@
 import {html, css, LitElement} from 'lit';
-import '../components/MainButton';
 import {OPTIONS} from '../util/Constants';
 import {STRING_VALUES} from '../util/Constants';
 import {MACHINE_TIMEOUT} from '../util/Constants';
 import { Machine } from '../model/Machine';
+import { Game } from '../model/Game';
+import '../components/ImageOption'
 
 export class GameView extends LitElement {
   static styles = css`
@@ -77,48 +78,37 @@ export class GameView extends LitElement {
       animation-duration: 0.1s;
       animation-iteration-count: infinite;
     }
+
+    .image-container {
+      padding: 10px;
+    }
   `;
 
   static get properties() {
     return {
-      player: {type: Object},
-      playerOptionSelected: {type: Object},
+      user: {type: Object},
+      userOptionSelected: {type: Object},
       machineOptionSelected: {type: Object},
       result: {type: String},
     };
   }
 
-  addPoint() {
-    this.player.increasePoint();
-    this.requestUpdate();
-  }
-
-  play = async (option) => {
+  async play(option) {
+    this.setVisibleLoader(true);
     this.result = null;
     this.machineOptionSelected = null;
-    this.playerOptionSelected = option;
-    this.VisibleLoader(true);
-    this.machineOptionSelected = await new Machine(MACHINE_TIMEOUT).run();
+    this.userOptionSelected = option;
+    this.user.setOptionSelected(option);
+    const machine = new Machine(STRING_VALUES.MACHINE, MACHINE_TIMEOUT);
+    this.machineOptionSelected = await machine.run();
+    machine.setOptionSelected(this.machineOptionSelected);
     this.setVisibleLoader(false);
-    this.manageResults();
-  }
-
-  manageResults() {
-    if (this.machineOptionSelected === this.playerOptionSelected) {
-      this.result = STRING_VALUES.RESULT_TIE;
-    } else if (
-      this.machineOptionSelected.enemy.includes(this.playerOptionSelected.name)
-    ) {
-      this.result = this.player.name + ' ' + STRING_VALUES.WON;
-      this.addPoint();
-    } else {
-      this.result = STRING_VALUES.MACHINE + ' ' + STRING_VALUES.WON;
-    }
+    this.result = new Game(this.user, machine).generateResult();
   }
 
   getChoosenOptionsBlock() {
     return html` <p>
-      ${this.player.name}: ${this.playerOptionSelected.name} |
+      ${this.user.name}: ${this.userOptionSelected.name} |
       ${STRING_VALUES.MACHINE}:
       ${this.machineOptionSelected
         ? this.machineOptionSelected.name
@@ -136,17 +126,17 @@ export class GameView extends LitElement {
         <span class="loader-icon"> </span>
       </div>
       <div class="center">
-        <p>Playing: ${this.player.name} | Points: ${this.player.points}</p>
+        <p>Playing: ${this.user.name} | Points: ${this.user.points}</p>
         ${OPTIONS.map(
           (option) =>
             html`
-              <button @click="${() => this.play(option)}">
-                ${option.name}
-              </button>
+            <div class="image-container">
+              <image-option @click="${() => this.play(option)}" .option="${option}"></image-option>
+            </div>
             `
         )}
         <div class="custom"></div>
-        ${this.playerOptionSelected ? this.getChoosenOptionsBlock() : html``}
+        ${this.userOptionSelected ? this.getChoosenOptionsBlock() : html``}
         ${this.result ? html`<p>${this.result}</p>` : html``}
       </div>
     `;

@@ -2,7 +2,7 @@ export const STRING_VALUES = {
   JOIN: 'Join',
   NAME: 'Name',
   ROCK: 'Rock',
-  PAPPER: 'Papper',
+  PAPER: 'Paper',
   SCISSORS: 'Scissors',
   MACHINE: 'Machine',
   THINKING: 'Thinking',
@@ -19,14 +19,17 @@ export const KEYS = {
 export const OPTIONS = [
   {
     name: STRING_VALUES.ROCK,
-    enemy: STRING_VALUES.PAPPER,
+    enemy: STRING_VALUES.PAPER,
+    img: 'assets/rock.png',
   },
   {
-    name: STRING_VALUES.PAPPER,
+    name: STRING_VALUES.PAPER,
     enemy: STRING_VALUES.SCISSORS,
+    img: 'assets/paper.png',
   },
   {
     name: STRING_VALUES.SCISSORS,
     enemy: STRING_VALUES.ROCK,
+    img: 'assets/scissors.png',
   },
 ];

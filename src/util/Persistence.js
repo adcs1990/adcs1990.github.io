@@ -10,8 +10,4 @@ export class Persistence {
       JSON.stringify(data)
     );
   }
-
-  static remove(name) {
-    window.localStorage.removeItem(`${KEYS.BASE_GAME}${name}`);
-  }
 }

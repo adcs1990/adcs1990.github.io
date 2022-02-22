@@ -1,14 +1,18 @@
 import {OPTIONS} from '../util/Constants';
+import {BasePlayer} from './base/BasePlayer';
 
-export class Machine {
-  constructor(timeOut) {
+export class Machine extends BasePlayer {
+  constructor(name, timeOut) {
+    super(name);
     this.timeOut = timeOut;
   }
 
-  run = async () => {
+  async run() {
     const randomOption = OPTIONS[Math.floor(Math.random() * OPTIONS.length)];
-    setTimeout(() => {
-      return randomOption;
-    }, this.timeOut);
-  };
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(randomOption);
+      }, this.timeOut);
+    });
+  }
 }

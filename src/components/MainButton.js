@@ -34,12 +34,6 @@ export class MainButton extends LitElement {
     };
   }
 
-  constructor(text, enabled) {
-    super();
-    this.text = text;
-    this.enabled = enabled;
-  }
-
   render() {
     return html`
       <button class="btn" .disabled="${!this.enabled}">${this.text}</button>

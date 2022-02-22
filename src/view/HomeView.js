@@ -2,7 +2,7 @@ import {html, css, LitElement} from 'lit';
 import '../components/InputField';
 import '../components/MainButton';
 import {STRING_VALUES} from '../util/Constants';
-import {BuilderPlayer} from '../util/BuilderPlayer';
+import {BuilderUser} from '../util/BuilderPlayer';
 import {EventFirer} from '../util/EventFirer';
 
 export class HomeView extends LitElement {
@@ -18,22 +18,22 @@ export class HomeView extends LitElement {
 
   static get properties() {
     return {
-      playerName: {type: String},
+      userName: {type: String},
       inputElement: {type: Object},
     };
   }
 
   constructor() {
     super();
-    this.playerName = '';
+    this.userName = '';
   }
 
   parseInput(e) {
     const text = e.detail.data;
     if (!text || !text.match(/^[a-z0-9]+$/i)) {
-      this.playerName = '';
+      this.userName = '';
     } else {
-      this.playerName = text;
+      this.userName = text;
     }
   }
 
@@ -41,7 +41,7 @@ export class HomeView extends LitElement {
     EventFirer.dispatchEvent(
       this,
       'set-user-event',
-      BuilderPlayer.getPlayer(this.playerName)
+      BuilderUser.getUser(this.userName)
     );
   }
 
@@ -57,7 +57,7 @@ export class HomeView extends LitElement {
         <main-button
           class="custom"
           text="${STRING_VALUES.JOIN}"
-          .enabled=${this.playerName.trim() !== ''}
+          .enabled=${this.userName.trim() !== ''}
           @click="${this.startGame}"
         ></main-button>
       </div>

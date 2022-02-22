@@ -204,12 +204,6 @@ export class InputField extends LitElement {
     };
   }
 
-  constructor(placeholder, required) {
-    super();
-    this.placeholder = placeholder;
-    this.required = required;
-  }
-
   updateText(e) {
     EventFirer.dispatchEvent(this, 'input-event', e.target.value);
   }

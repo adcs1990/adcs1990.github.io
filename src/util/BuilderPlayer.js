@@ -1,9 +1,9 @@
-import {Player} from '../model/Player';
+import {User} from '../model/User';
 import {Persistence} from './Persistence';
 
-export class BuilderPlayer {
-  static getPlayer(name) {
+export class BuilderUser {
+  static getUser(name) {
     const player = Persistence.get(name) || {name: name, points: 0};
-    return new Player(player.name, player.points);
+    return new User(player.name, player.points);
   }
 }

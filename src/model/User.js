@@ -1,7 +1,9 @@
 import {Persistence} from '../util/Persistence';
-export class Player {
+import {BasePlayer} from './base/BasePlayer';
+
+export class User extends BasePlayer {
   constructor(name, points) {
-    this.name = name;
+    super(name);
     this.points = points;
   }
 

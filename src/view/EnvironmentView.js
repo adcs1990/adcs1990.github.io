@@ -5,19 +5,19 @@ import './GameView';
 export class EnvironmentView extends LitElement {
   static get properties() {
     return {
-      player: {type: Object},
+      user: {type: Object},
     };
   }
 
   setUser(e) {
-    this.player = e.detail.data;
+    this.user = e.detail.data;
   }
 
   render() {
     return html`
-      ${this.player == null
+      ${this.user == null
         ? html`<home-view @set-user-event=${this.setUser}></home-view>`
-        : html`<game-view .player="${this.player}"></game-view>`}
+        : html`<game-view .user="${this.user}"></game-view>`}
     `;
   }
 }
