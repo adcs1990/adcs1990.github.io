@@ -1,0 +1,1 @@
+import "./src/view/GameEnvironment.js";

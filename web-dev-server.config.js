@@ -5,6 +5,7 @@
  */
 
 import {legacyPlugin} from '@web/dev-server-legacy';
+import('@web/dev-server').DevServerConfig;
 
 const mode = process.env.MODE || 'dev';
 if (!['dev', 'prod'].includes(mode)) {
@@ -12,12 +13,13 @@ if (!['dev', 'prod'].includes(mode)) {
 }
 
 export default {
+  open: '/',
+  appIndex: 'index.html',
   nodeResolve: {exportConditions: mode === 'dev' ? ['development'] : []},
   preserveSymlinks: true,
   plugins: [
     legacyPlugin({
       polyfills: {
-        // Manually imported in index.html file
         webcomponents: false,
       },
     }),
