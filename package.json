@@ -40,7 +40,6 @@
   "license": "BSD-3-Clause",
   "dependencies": {
     "@open-wc/dev-server-hmr": "^0.1.2",
-    "@vaadin/router": "^1.7.4",
     "lit": "^2.0.0"
   },
   "devDependencies": {
