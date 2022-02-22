@@ -3,11 +3,7 @@ import {Persistence} from './Persistence';
 
 export class BuilderPlayer {
   static getPlayer(name) {
-    let player = Persistence.get(name);
-    if (!player) {
-      player = new Player(name, 0);
-      Persistence.set(name, player);
-    }
-    return player;
+    const player = Persistence.get(name) || {name: name, points: 0};
+    return new Player(player.name, player.points);
   }
 }

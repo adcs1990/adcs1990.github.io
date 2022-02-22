@@ -27,10 +27,12 @@ export class MainButton extends LitElement {
     }
   `;
 
-  static properties = {
-    text: {type: String},
-    enabled: {type: Boolean},
-  };
+  static get properties() {
+    return {
+      text: {type: String},
+      enabled: {type: Boolean},
+    };
+  }
 
   constructor(text, enabled) {
     super();
@@ -40,9 +42,7 @@ export class MainButton extends LitElement {
 
   render() {
     return html`
-      <button class="btn" .disabled="${!this.enabled}">
-        ${this.text}
-      </button>
+      <button class="btn" .disabled="${!this.enabled}">${this.text}</button>
     `;
   }
 }

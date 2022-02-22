@@ -1,5 +1,4 @@
 import {html, css, LitElement} from 'lit';
-import {EVENT_LISTENERS} from '../util/Constants';
 import {EventFirer} from '../util/EventFirer';
 
 export class InputField extends LitElement {
@@ -197,11 +196,13 @@ export class InputField extends LitElement {
     }
   `;
 
-  static properties = {
-    placeholder: {type: String},
-    required: {type: Boolean},
-    text: {type: String},
-  };
+  static get properties() {
+    return {
+      placeholder: {type: String},
+      required: {type: Boolean},
+      text: {type: String},
+    };
+  }
 
   constructor(placeholder, required) {
     super();
@@ -209,15 +210,15 @@ export class InputField extends LitElement {
     this.required = required;
   }
 
-  updateText(e){
-    EventFirer.dispatchEvent(this, EVENT_LISTENERS.INPUT_EVENT, e.target.value);
+  updateText(e) {
+    EventFirer.dispatchEvent(this, 'input-event', e.target.value);
   }
 
   render() {
     return html`
       <label class="matter-textfield-outlined">
-        <input placeholder=" " @input=${this.updateText}/>
-        <span>${this.placeholder + (this.required ? "*" : "")}</span>
+        <input placeholder=" " @input=${this.updateText} />
+        <span>${this.placeholder + (this.required ? '*' : '')}</span>
       </label>
     `;
   }

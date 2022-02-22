@@ -10,7 +10,7 @@
     "build": "echo \"This is not a TypeScript project, so no need to build.\"",
     "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
     "lint:eslint": "eslint '**/*.js'",
-    "lint:lit-analyzer": "lit-analyzer my-element.js",
+    "lint:lit-analyzer": "lit-analyzer 'src/**/*.js'",
     "format": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ./.eslintignore --write",
     "docs": "npm run docs:clean && npm run analyze && npm run docs:build && npm run docs:assets && npm run docs:gen",
     "docs:clean": "rimraf docs",
