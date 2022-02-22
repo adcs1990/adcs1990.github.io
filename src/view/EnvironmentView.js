@@ -14,8 +14,7 @@ export class EnvironmentView extends LitElement {
   connectedCallback(){
     super.connectedCallback();
     this.addEventListener(EVENT_LISTENERS.SET_USER_EVENT, (e) => {
-      console.log("Player setted:");
-      console.log(e.detail.data);
+      this.player = e.detail.data;
     });
   }
 
@@ -23,7 +22,7 @@ export class EnvironmentView extends LitElement {
     return html`
       ${this.player == null
       ? html`<home-view></home-view>`
-      : html`<game-view></game-view>`
+      : html`<game-view .player="${this.player}"></game-view>`
       }
     `;
   }

@@ -42,7 +42,7 @@ export class HomeView extends LitElement {
   }
 
   startGame(){
-    EventFirer.dispatchEvent(this, EVENT_LISTENERS.SET_USER_EVENT, {detail: {data: BuilderPlayer.getPlayer(this.playerName)}});
+    EventFirer.dispatchEvent(this, EVENT_LISTENERS.SET_USER_EVENT, BuilderPlayer.getPlayer(this.playerName));
   }
 
   render() {

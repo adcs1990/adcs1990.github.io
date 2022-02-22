@@ -6,4 +6,8 @@ export class Player {
     this.points = points;
   }
 
+  increasePoint(){
+    this.points += 1;
+  }
+
 }
