@@ -2,9 +2,9 @@ import {html, css, LitElement} from 'lit';
 import {OPTIONS} from '../util/Constants';
 import {STRING_VALUES} from '../util/Constants';
 import {MACHINE_TIMEOUT} from '../util/Constants';
-import { Machine } from '../model/Machine';
-import { Game } from '../model/Game';
-import '../components/ImageOption'
+import {Builder} from '../util/Builder';
+import {EventFirer} from '../util/EventFirer';
+import '../components/ImageOption';
 
 export class GameView extends LitElement {
   static styles = css`
@@ -99,11 +99,12 @@ export class GameView extends LitElement {
     this.machineOptionSelected = null;
     this.userOptionSelected = option;
     this.user.setOptionSelected(option);
-    const machine = new Machine(STRING_VALUES.MACHINE, MACHINE_TIMEOUT);
+    const machine = Builder.createMachine(STRING_VALUES.MACHINE, MACHINE_TIMEOUT);
+
     this.machineOptionSelected = await machine.run();
     machine.setOptionSelected(this.machineOptionSelected);
     this.setVisibleLoader(false);
-    this.result = new Game(this.user, machine).generateResult();
+    this.result = Builder.createGame(this.user, machine).generateResult();
   }
 
   getChoosenOptionsBlock() {
@@ -117,7 +118,13 @@ export class GameView extends LitElement {
   }
 
   setVisibleLoader(visible) {
-    this.shadowRoot.getElementById('loader').style.display = visible ? 'block' : 'none';
+    this.shadowRoot.getElementById('loader').style.display = visible
+      ? 'block'
+      : 'none';
+  }
+
+  exit() {
+    EventFirer.dispatchEvent(this, 'exit-event', null);
   }
 
   render() {
@@ -130,15 +137,19 @@ export class GameView extends LitElement {
         ${OPTIONS.map(
           (option) =>
             html`
-            <div class="image-container">
-              <image-option @click="${() => this.play(option)}" .option="${option}"></image-option>
-            </div>
+              <div class="image-container">
+                <image-option
+                  @click="${() => this.play(option)}"
+                  .option="${option}"
+                ></image-option>
+              </div>
             `
         )}
         <div class="custom"></div>
         ${this.userOptionSelected ? this.getChoosenOptionsBlock() : html``}
         ${this.result ? html`<p>${this.result}</p>` : html``}
       </div>
+      <div><a @click="${this.exit}">Exit</a></div>
     `;
   }
 }

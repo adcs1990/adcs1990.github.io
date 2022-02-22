@@ -2,7 +2,7 @@ import {html, css, LitElement} from 'lit';
 import '../components/InputField';
 import '../components/MainButton';
 import {STRING_VALUES} from '../util/Constants';
-import {BuilderUser} from '../util/BuilderPlayer';
+import {Builder} from '../util/Builder';
 import {EventFirer} from '../util/EventFirer';
 
 export class HomeView extends LitElement {
@@ -41,7 +41,7 @@ export class HomeView extends LitElement {
     EventFirer.dispatchEvent(
       this,
       'set-user-event',
-      BuilderUser.getUser(this.userName)
+      Builder.createUser(this.userName)
     );
   }
 

@@ -1,24 +1,16 @@
 {
-  "name": "@lit/lit-starter-js",
+  "name": "rock-paper-scissors",
   "private": true,
   "version": "1.0.0",
-  "description": "A simple web component",
-  "main": "my-element.js",
-  "module": "my-element.js",
+  "description": "A Rock Paper and Scissors Game",
+  "main": "index.js",
+  "module": "index.js",
   "type": "module",
   "scripts": {
-    "build": "echo \"This is not a TypeScript project, so no need to build.\"",
     "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
     "lint:eslint": "eslint '**/*.js'",
     "lint:lit-analyzer": "lit-analyzer 'src/**/*.js'",
     "format": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ./.eslintignore --write",
-    "docs": "npm run docs:clean && npm run analyze && npm run docs:build && npm run docs:assets && npm run docs:gen",
-    "docs:clean": "rimraf docs",
-    "docs:gen": "eleventy --config=.eleventy.cjs",
-    "docs:gen:watch": "eleventy --config=.eleventy.cjs --watch",
-    "docs:build": "rollup -c --file docs/my-element.bundled.js",
-    "docs:assets": "cp node_modules/prismjs/themes/prism-okaidia.css docs/",
-    "docs:serve": "wds --root-dir=docs --node-resolve --watch",
     "analyze": "cem analyze --litelement --globs \"**/*.js\" --exclude docs",
     "analyze:watch": "cem analyze --litelement --globs \"**/*.js\" --exclude docs --watch",
     "serve": "wds --watch",
@@ -27,8 +19,7 @@
     "test:dev": "wtr",
     "test:watch": "wtr --watch",
     "test:prod": "MODE=prod wtr",
-    "test:prod:watch": "MODE=prod wtr --watch",
-    "checksize": "rollup -c ; cat my-element.bundled.js | gzip -9 | wc -c ; rm my-element.bundled.js"
+    "test:prod:watch": "MODE=prod wtr --watch"
   },
   "keywords": [
     "web-components",
@@ -36,7 +27,7 @@
     "javascript",
     "lit"
   ],
-  "author": "Google LLC",
+  "author": "Alfonso David Clement Paredes",
   "license": "BSD-3-Clause",
   "dependencies": {
     "@open-wc/dev-server-hmr": "^0.1.2",

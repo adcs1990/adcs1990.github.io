@@ -17,7 +17,10 @@ export class EnvironmentView extends LitElement {
     return html`
       ${this.user == null
         ? html`<home-view @set-user-event=${this.setUser}></home-view>`
-        : html`<game-view .user="${this.user}"></game-view>`}
+        : html`<game-view
+            .user="${this.user}"
+            @exit-event="${this.setUser}"
+          ></game-view>`}
     `;
   }
 }
