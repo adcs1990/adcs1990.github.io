@@ -1,6 +1,6 @@
 import {html, css, LitElement} from 'lit';
-import {EVENT_LISTENERS} from '../../util/Constants';
-import {EventFirer} from '../../util/EventFirer';
+import {EVENT_LISTENERS} from '../util/Constants';
+import {EventFirer} from '../util/EventFirer';
 
 export class InputField extends LitElement {
   static styles = css`

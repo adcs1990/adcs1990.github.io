@@ -1,1 +1,1 @@
-import "./src/view/GameEnvironment.js";
+import "./src/view/EnvironmentView";

@@ -1,8 +1,9 @@
 
 export class Player {
 
-  constructor(name) {
+  constructor(name, points) {
     this.name = name;
+    this.points = points;
   }
 
 }
