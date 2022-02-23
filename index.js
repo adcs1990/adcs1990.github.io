@@ -1,1 +1,1 @@
-import './src/view/EnvironmentView';
+import './src/view/EnvironmentView.js';
