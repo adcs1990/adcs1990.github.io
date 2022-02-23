@@ -1,5 +1,4 @@
 import {EnvironmentView} from '../../../src/view/EnvironmentView';
-import {User} from '../../../src/model/User';
 import {fixture, assert} from '@open-wc/testing';
 import {html} from 'lit/static-html.js';
 
@@ -9,30 +8,14 @@ describe('EnvironmentView.js', () => {
     assert.instanceOf(el, EnvironmentView);
   });
 
-  it('Component render with correct child based in the set of user', async () => {
+  it('Component render home-view with user unsetted', async () => {
     const el = await fixture(html`<environment-view></environment-view>`);
-    assert.shadowDom.equal(
-      el,
-      `
-      <div class="container">
-        <home-view>
-        </home-view>
-      </div>
-    `
-    );
-    const user = new User('Joan', 0);
-    el.setUser({detail: {data: user}});
+    assert.isTrue(el.shadowRoot.innerHTML.includes('<home-view>'));
+  });
 
-    const elWithUser = await fixture(html`<environment-view .user="${user}"></environment-view>`);
-    assert.shadowDom.equal(
-        elWithUser,
-        `
-        <div class="container">
-          <game-view>
-          </game-view>
-        </div>
-      `
-      );
-    
+  it('Component render game-view with user setted', async () => {
+    const user = {name: 'Joan', points: 0};
+    const el = await fixture(html`<environment-view .user="${user}"></environment-view>`);
+    assert.isTrue(el.shadowRoot.innerHTML.includes('<game-view>'));
   });
 });

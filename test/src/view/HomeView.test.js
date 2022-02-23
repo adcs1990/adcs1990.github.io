@@ -13,10 +13,14 @@ describe('HomeView.js', () => {
     assert.equal(el.userName, '');
   });
 
-  it('Only userName alphanumeric is allowed', async () => {
+  it('Input userName sets empty if non alphanumeric words are introduced', async () => {
     const el = await fixture(html`<home-view></home-view>`);
     el.parseInput({detail: {data: '*Joseph'}});
     assert.equal(el.userName, '');
+  });
+
+  it('Input userName sets correctly if alphanumeric words are introduced', async () => {
+    const el = await fixture(html`<home-view></home-view>`);
     el.parseInput({detail: {data: 'Joseph'}});
     assert.equal(el.userName, 'Joseph');
   });

@@ -6,7 +6,7 @@ export const STRING_VALUES = {
   SCISSORS: 'Scissors',
   MACHINE: 'Machine',
   THINKING: 'Thinking',
-  RESULT_TIE: "It's a tie!",
+  RESULT_TIE: 'It\'s a tie!',
   WON: 'won!',
   PLAYING: 'Playing',
   POINTS: 'Points',

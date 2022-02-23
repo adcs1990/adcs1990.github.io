@@ -9,8 +9,6 @@ describe('User.js', () => {
     const user = new User(name, points);
     user.save();
     assert.equal(Persistence.get(name).points, points);
-    user.increasePoint();
-    assert.equal(user.points, 5);
   });
 
   it('Increase points adds 1 point each time', async () => {

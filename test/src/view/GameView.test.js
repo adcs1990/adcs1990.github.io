@@ -15,18 +15,22 @@ describe('GameView.js', () => {
     const option = OPTIONS[0];
     const el = await fixture(html`<game-view .user="${user}"></game-view>`);
     await el.play(option);
-    assert.equal(el.user, user);
     assert.equal(el.userOptionSelected, option);
     assert.isNotNull(el.machineOptionSelected);
     assert.isNotNull(el.result);
     assert.equal(user.lastOptionSelected, option);
-  }).timeout(10000);
+  });
 
-  it('Show and Hide Loader correctly in css', async () => {
+  it('Show Loader correctly in css', async () => {
     const user = new User('Joan', 0);
     const el = await fixture(html`<game-view .user="${user}"></game-view>`);
     el.setVisibleLoader(true);
     assert.equal(el.shadowRoot.getElementById('loader').style.display, 'block');
+  });
+
+  it('Hide Loader correctly in css', async () => {
+    const user = new User('Joan', 0);
+    const el = await fixture(html`<game-view .user="${user}"></game-view>`);
     el.setVisibleLoader(false);
     assert.equal(el.shadowRoot.getElementById('loader').style.display, 'none');
   });
@@ -40,13 +44,4 @@ describe('GameView.js', () => {
     assert.isTrue(spy.called);
   });
 
-  it('Click in option', async () => {
-    const user = new User('Joan', 0);
-    const el = await fixture(html`<game-view .user="${user}"></game-view>`);
-    const button = el.shadowRoot.querySelector('image-option');
-    const spy = sinon.spy();
-    button.addEventListener('click', spy);
-    button.click();
-    assert.isTrue(spy.called);
-  });
 });
