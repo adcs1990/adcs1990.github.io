@@ -63,7 +63,7 @@ npm run format
 
 ## Deploy site
 
-https://adcs1990.github.io/docs/
+https://adcs1990.github.io/
 
 ## More information
 
