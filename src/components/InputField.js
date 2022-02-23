@@ -5,11 +5,11 @@ export class InputField extends LitElement {
   static styles = css`
     .matter-textfield-outlined {
       --matter-helper-theme: rgb(
-        var(--matter-theme-rgb, var(--matter-primary-rgb, 33, 150, 243))
+        var(--matter-theme-rgb, var(--matter-primary-rgb, 255, 255, 255))
       );
-      --matter-helper-safari1: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.38);
-      --matter-helper-safari2: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.6);
-      --matter-helper-safari3: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.87);
+      --matter-helper-safari1: rgba(var(--matter-onsurface-rgb, 255, 255, 255), 0.38);
+      --matter-helper-safari2: rgba(var(--matter-onsurface-rgb, 255, 255, 255), 0.6);
+      --matter-helper-safari3: rgba(var(--matter-onsurface-rgb, 255, 255, 255), 0.87);
       position: relative;
       display: inline-block;
       padding-top: 6px;
@@ -37,7 +37,7 @@ export class InputField extends LitElement {
       padding: 15px 13px 15px;
       width: 100%;
       height: inherit;
-      color: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.87);
+      color: rgba(var(--matter-onsurface-rgb, 255, 255, 255), 0.87);
       -webkit-text-fill-color: currentColor; /* Safari */
       background-color: transparent;
       box-shadow: inset 1px 0 transparent, inset -1px 0 transparent,
@@ -62,7 +62,7 @@ export class InputField extends LitElement {
       display: flex;
       width: 100%;
       max-height: 100%;
-      color: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.6);
+      color: rgba(var(--matter-onsurface-rgb, 255, 255, 255), 0.6);
       font-size: 75%;
       line-height: 15px;
       cursor: text;
@@ -152,7 +152,7 @@ export class InputField extends LitElement {
     .matter-textfield-outlined > input:disabled + span {
       border-color: transparent var(--matter-helper-safari1)
         var(--matter-helper-safari1) !important;
-      color: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.38);
+      color: rgba(var(--matter-onsurface-rgb, 255, 255, 255), 0.38);
       pointer-events: none;
     }
 

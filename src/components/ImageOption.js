@@ -8,6 +8,16 @@ export class ImageOption extends LitElement {
     .img-component:hover {
       opacity: 0.7;
     }
+    .container {
+      border-width: 4px;
+      border-color: black;
+      border-style: solid;
+      padding: 10px;
+      flex-direction: column;
+    }
+    .container:hover {
+      background-color: gray;
+    }
   `;
 
   static get properties() {
@@ -17,7 +27,10 @@ export class ImageOption extends LitElement {
   }
 
   render() {
-    return html` <img class="img-component" src="${this.option.img}" /> `;
+    return html` 
+    <div class="container">
+      <img class="img-component" src="${this.option.img}" alt="${this.option.name}" />
+    </div>`;
   }
 }
 customElements.define('image-option', ImageOption);

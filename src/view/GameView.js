@@ -11,8 +11,10 @@ export class GameView extends LitElement {
     .center {
       margin: 0 auto;
       text-align: center;
+      color: #ffffff;
+      font-size: 16pt;
     }
-    .custom {
+    .spacer {
       margin-top: 20px;
     }
     @keyframes rotator {
@@ -78,9 +80,26 @@ export class GameView extends LitElement {
       animation-duration: 0.1s;
       animation-iteration-count: infinite;
     }
+    
+    .container-elements {
+      display: flex;
+      justify-content: center;
+    }
 
-    .image-container {
-      padding: 10px;
+    .bar {
+      background-color: #ffffff;
+      min-height: 60px;
+      text-align: right;
+    }
+
+    .bar > img {
+      max-width: 30px;
+      margin-right: 15px;
+      margin-top: 15px;
+    }
+
+    .bar > img:hover {
+      opacity: 0.6;
     }
   `;
 
@@ -99,8 +118,10 @@ export class GameView extends LitElement {
     this.machineOptionSelected = null;
     this.userOptionSelected = option;
     this.user.setOptionSelected(option);
-    const machine = Builder.createMachine(STRING_VALUES.MACHINE, MACHINE_TIMEOUT);
-
+    const machine = Builder.createMachine(
+      STRING_VALUES.MACHINE,
+      MACHINE_TIMEOUT
+    );
     this.machineOptionSelected = await machine.run();
     machine.setOptionSelected(this.machineOptionSelected);
     this.setVisibleLoader(false);
@@ -132,24 +153,27 @@ export class GameView extends LitElement {
       <div id="loader" class="loader-overlay">
         <span class="loader-icon"> </span>
       </div>
+      <div class="bar"><img alt="${STRING_VALUES.EXIT}" src="../../assets/logout.png" @click="${this.exit}"/></div>
       <div class="center">
-        <p>Playing: ${this.user.name} | Points: ${this.user.points}</p>
-        ${OPTIONS.map(
-          (option) =>
-            html`
-              <div class="image-container">
-                <image-option
-                  @click="${() => this.play(option)}"
-                  .option="${option}"
-                ></image-option>
-              </div>
-            `
-        )}
-        <div class="custom"></div>
+        <p>${STRING_VALUES.PLAYING}: ${this.user.name} | ${STRING_VALUES.POINTS}: ${this.user.points}</p>
+        <h6>${STRING_VALUES.CHOOSE}</h6>
+        <div class="container-elements">
+          ${OPTIONS.map(
+            (option) =>
+              html`
+                <div class="image-container">
+                  <image-option
+                    @click="${() => this.play(option)}"
+                    .option="${option}"
+                  ></image-option>
+                </div>
+              `
+          )}
+        </div>
+        <div class="spacer"></div>
         ${this.userOptionSelected ? this.getChoosenOptionsBlock() : html``}
-        ${this.result ? html`<p>${this.result}</p>` : html``}
+        ${this.result ? html`<h1>${this.result}</h1>` : html``}
       </div>
-      <div><a @click="${this.exit}">Exit</a></div>
     `;
   }
 }

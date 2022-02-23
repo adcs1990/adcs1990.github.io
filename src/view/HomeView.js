@@ -11,8 +11,27 @@ export class HomeView extends LitElement {
       margin: 0 auto;
       text-align: center;
     }
-    .custom {
+
+    .spacer {
       margin-top: 20px;
+    }
+    h3 {
+      color: #ffffff;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    img {
+      margin-top: 30px;
+      max-width: 200px;
+    }
+
+    .bar {
+      background-color: #ffffff;
+      min-height: 60px;
+      text-align: left;
+      padding-top: 15px;
+      padding-left: 15px;
+      font-family: 'Roboto', sans-serif;
     }
   `;
 
@@ -48,12 +67,15 @@ export class HomeView extends LitElement {
   render() {
     return html`
       <div class="center">
+      <div class="bar"><h4>${STRING_VALUES.GAME_NAME}</h4></div>
+        <img alt="${STRING_VALUES.GAME_NAME}" src="../../assets/rock-paper-scissors.png"/>
+        <h3>${STRING_VALUES.NEW_USER}</h3>
         <input-field
           placeholder="${STRING_VALUES.NAME}"
           ?required="${true}"
           @input-event="${this.parseInput}"
         ></input-field>
-        <div class="custom"></div>
+        <div class="spacer"></div>
         <main-button
           class="custom"
           text="${STRING_VALUES.JOIN}"

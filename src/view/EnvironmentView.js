@@ -1,8 +1,14 @@
-import {html, LitElement} from 'lit';
+import {html, css, LitElement} from 'lit';
 import './HomeView';
 import './GameView';
 
 export class EnvironmentView extends LitElement {
+  static styles = css`
+    .container {
+      min-width: 500px;
+    }
+  `;
+
   static get properties() {
     return {
       user: {type: Object},
@@ -15,12 +21,14 @@ export class EnvironmentView extends LitElement {
 
   render() {
     return html`
-      ${this.user == null
-        ? html`<home-view @set-user-event=${this.setUser}></home-view>`
-        : html`<game-view
-            .user="${this.user}"
-            @exit-event="${this.setUser}"
-          ></game-view>`}
+      <div class="container">
+        ${this.user == null
+          ? html`<home-view @set-user-event=${this.setUser}></home-view>`
+          : html`<game-view
+              .user="${this.user}"
+              @exit-event="${this.setUser}"
+            ></game-view>`}
+      </div>
     `;
   }
 }

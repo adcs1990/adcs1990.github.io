@@ -8,6 +8,12 @@ export const STRING_VALUES = {
   THINKING: 'Thinking',
   RESULT_TIE: "It's a tie!",
   WON: 'won!',
+  PLAYING: 'Playing',
+  POINTS: 'Points',
+  NEW_USER: 'Create or use an existing user',
+  GAME_NAME: 'Rock, Paper, Scissors Game',
+  EXIT: 'Exit',
+  CHOOSE: 'Choose an option',
 };
 
 export const MACHINE_TIMEOUT = 1200;
