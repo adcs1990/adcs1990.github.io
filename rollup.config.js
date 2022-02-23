@@ -1,21 +1,82 @@
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import babel from '@rollup/plugin-babel';
+import html from '@web/rollup-plugin-html';
+import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import { terser } from 'rollup-plugin-terser';
-
-// `npm run build` -> `production` is true
-// `npm run dev` -> `production` is false
-const production = !process.env.ROLLUP_WATCH;
+import { generateSW } from 'rollup-plugin-workbox';
+import path from 'path';
 
 export default {
-	input: 'index.js',
-	output: {
-		file: 'public/bundle.js',
-		format: 'iife', // immediately-invoked function expression — suitable for <script> tags
-		sourcemap: true
-	},
-	plugins: [
-		resolve(), // tells Rollup how to find date-fns in node_modules
-		commonjs(), // converts date-fns to ES modules
-		production && terser() // minify, but only in production
-	]
+  input: 'index.html',
+  output: {
+    entryFileNames: '[hash].js',
+    chunkFileNames: '[hash].js',
+    assetFileNames: '[hash][extname]',
+    format: 'es',
+    dir: 'docs',
+  },
+  preserveEntrySignatures: false,
+
+  plugins: [
+    /** Enable using HTML as rollup entrypoint */
+    html({
+      minify: true,
+      injectServiceWorker: true,
+      serviceWorkerPath: 'docs/sw.js',
+    }),
+    /** Resolve bare module imports */
+    nodeResolve(),
+    /** Minify JS */
+    terser(),
+    /** Bundle assets references via import.meta.url */
+    importMetaAssets(),
+    /** Compile JS to a lower language target */
+    babel({
+      babelHelpers: 'bundled',
+      presets: [
+        [
+          require.resolve('@babel/preset-env'),
+          {
+            targets: [
+              'last 3 Chrome major versions',
+              'last 3 Firefox major versions',
+              'last 3 Edge major versions',
+              'last 3 Safari major versions',
+            ],
+            modules: false,
+            bugfixes: true,
+          },
+        ],
+      ],
+      plugins: [
+        [
+          require.resolve('babel-plugin-template-html-minifier'),
+          {
+            modules: { lit: ['html', { name: 'css', encapsulation: 'style' }] },
+            failOnError: false,
+            strictCSS: true,
+            htmlMinifier: {
+              collapseWhitespace: true,
+              conservativeCollapse: true,
+              removeComments: true,
+              caseSensitive: true,
+              minifyCSS: true,
+            },
+          },
+        ],
+      ],
+    }),
+    /** Create and inject a service worker */
+    generateSW({
+      navigateFallback: '/index.html',
+      // where to output the generated sw
+      swDest: path.join('docs', 'sw.js'),
+      // directory to match patterns against to be precached
+      globDirectory: path.join('docs'),
+      // cache any html js and css by default
+      globPatterns: ['**/*.{html,js,css,webmanifest}'],
+      skipWaiting: true,
+      clientsClaim: true,
+    }),
+  ],
 };
