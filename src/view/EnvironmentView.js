@@ -22,7 +22,7 @@ export class EnvironmentView extends LitElement {
   render() {
     return html`
       <div class="container">
-        ${this.user == null
+        ${!this.user
           ? html`<home-view @set-user-event=${this.setUser}></home-view>`
           : html`<game-view
               .user="${this.user}"

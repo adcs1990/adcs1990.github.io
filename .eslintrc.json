@@ -12,7 +12,8 @@
     "node": true,
     "browser": true,
     "mocha": true,
-    "es6": true
+    "es6": true,
+    "sinon": true
   },
   "rules": {
     "no-unexpected-multiline": "off"

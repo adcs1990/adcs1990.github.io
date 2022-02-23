@@ -38,7 +38,6 @@ export class HomeView extends LitElement {
   static get properties() {
     return {
       userName: {type: String},
-      inputElement: {type: Object},
     };
   }
 
