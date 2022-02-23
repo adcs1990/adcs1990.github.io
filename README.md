@@ -1,4 +1,4 @@
-# LitElement JavaScript starter
+# LitElement Deployment Test
 
 This project contains a development test developed in JavaScript using the Lit-Element framework.
 It's a simple game based in the traditional rock, paper and scissors game.
